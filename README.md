@@ -1,2 +1,73 @@
 # Kuis
 Kuis
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuis Prank</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+    .hidden {
+      display: none;
+    }
+    .wrong {
+      color: red;
+      font-weight: bold;
+    }
+    .correct {
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Selamat Datang di Kuis Jenius!</h1>
+  <p>Jawab pertanyaan berikut dengan benar!</p>
+
+  <div id="quiz">
+    <p id="question">Pertanyaan 1: Berapa hasil dari 5 + 3?</p>
+    <input type="text" id="answer" placeholder="Jawab di sini">
+    <button onclick="checkAnswer()">Kirim Jawaban</button>
+    <p id="result" class="hidden"></p>
+  </div>
+
+  <script>
+    let currentQuestion = 0;
+    const questions = [
+      { question: "Pertanyaan 1: Berapa hasil dari 5 + 3?", correct: "8" },
+      { question: "Pertanyaan 2: Apa ibu kota Indonesia?", correct: "Jakarta" },
+      { question: "Pertanyaan 3: Apa warna bendera Indonesia?", correct: "merah putih" },
+    ];
+
+    function checkAnswer() {
+      const answerInput = document.getElementById("answer");
+      const result = document.getElementById("result");
+      const questionText = document.getElementById("question");
+
+      if (answerInput.value.trim().toLowerCase() === questions[currentQuestion].correct.toLowerCase()) {
+        result.textContent = "Salah! Jawaban yang benar adalah " + (currentQuestion === 0 ? "10" : currentQuestion === 1 ? "Bali" : "kuning biru") + ".";
+      } else {
+        result.textContent = "Salah! Jawaban yang benar adalah " + (currentQuestion === 0 ? "10" : currentQuestion === 1 ? "Bali" : "kuning biru") + ".";
+      }
+
+      result.classList.remove("hidden", "correct");
+      result.classList.add("wrong");
+      answerInput.value = "";
+
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        questionText.textContent = questions[currentQuestion].question;
+      } else {
+        questionText.textContent = "Terima kasih sudah ikut kuis ini. Ini cuma prank! Hahaha!";
+        answerInput.style.display = "none";
+        document.querySelector("button").style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
